@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export",
+    "deploy": "npx netlify deploy --dir out --prod",
     "start": "next start"
   },
   "dependencies": {
