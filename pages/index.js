@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Head from 'next/head';
 
 import { config, content } from '@lib/content';
@@ -7,6 +8,16 @@ import WaveText from '@components/WaveText';
 
 export default function Home() {
 
+  useEffect(() => {
+    const bg = document.getElementById('bg-music');
+    bg.volume = 0.2;
+    try {
+      bg.play();
+    } catch (e) {
+      // no-op
+    }
+  }, []);
+
   return (
     <>
       <Head>
@@ -14,15 +25,19 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, user-scalable=no"></meta>
       </Head>
 
-      <SpazCard className="md:container md:mx-auto px-4">
+      <div className="md:container md:mx-auto p-10">
+        <audio id="bg-music" loop>
+          <source src="exarm.mp3" type="audio/mp3" />
+        </audio>
+
         <div className="grid grid-cols-12">
           <div className="col-span-full lg:col-start-3 lg:col-span-8">
 
             <SpazCard className="flex flex-col items-center justify-center p-20 rounded-lg m-4">
               <div className="w-60 h-60 flex items-center justify-center">
-                <img className="rounded-full" src={content.profileImg} />
+                <img className="rounded-full rotate linear infinite" src={content.profileImg} />
               </div>
-              <h1 className="text-4xl font-semibold mt-3"><SnakeText text={content.name} /></h1>
+              <h1 className="text-4xl font-semibold mt-3 rotate linear infinite"><SnakeText text={content.name} /></h1>
               <div className="mt-3">
                 <span className="text-2xl">{content.description}</span>
               </div>
@@ -49,9 +64,12 @@ export default function Home() {
               ))
             }
 
+            <div className="mt-10">
+              <a href="https://www.youtube.com/watch?v=Q6Pqu9PI1gE">rise again cover by Orchestr/a/</a>
+            </div>
           </div>
         </div>
-      </SpazCard>
+      </div>
     </>
   )
 }
