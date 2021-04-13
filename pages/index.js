@@ -9,13 +9,17 @@ import WaveText from '@components/WaveText';
 export default function Home() {
 
   useEffect(() => {
-    const bg = document.getElementById('bg-music');
-    bg.volume = 0.2;
-    try {
-      bg.play();
-    } catch (e) {
-      // no-op
+    const playMusic = async () => {
+      const bg = document.getElementById('bg-music');
+      bg.volume = 0.2;
+      try {
+        await bg.play();
+      } catch (e) {
+
+      }
     }
+    playMusic();
+
   }, []);
 
   return (
@@ -37,7 +41,7 @@ export default function Home() {
               <div className="w-60 h-60 flex items-center justify-center">
                 <img className="rounded-full rotate linear infinite" src={content.profileImg} />
               </div>
-              <h1 className="text-4xl font-semibold mt-3 rotate linear infinite"><SnakeText text={content.name} /></h1>
+              <h1 className="text-4xl font-semibold mt-3"><SnakeText text={content.name} /></h1>
               <div className="mt-3">
                 <span className="text-2xl">{content.description}</span>
               </div>
